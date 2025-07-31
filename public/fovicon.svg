@@ -1,0 +1,45 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="truckGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cargoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="calcGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect x="8" y="32" width="32" height="16" rx="2" fill="url(#truckGradient)" />
+  <rect x="38" y="28" width="12" height="20" rx="2" fill="url(#truckGradient)" />
+  <rect x="10" y="34" width="28" height="12" rx="1" fill="url(#cargoGradient)" stroke="#ffffff" stroke-width="1"/>
+  
+  <rect x="12" y="36" width="6" height="3" rx="0.5" fill="#ffffff" opacity="0.3"/>
+  <rect x="20" y="36" width="6" height="3" rx="0.5" fill="#ffffff" opacity="0.3"/>
+  <rect x="28" y="36" width="6" height="3" rx="0.5" fill="#ffffff" opacity="0.3"/>
+  <rect x="12" y="41" width="6" height="3" rx="0.5" fill="#ffffff" opacity="0.3"/>
+  <rect x="20" y="41" width="6" height="3" rx="0.5" fill="#ffffff" opacity="0.3"/>
+  <rect x="28" y="41" width="6" height="3" rx="0.5" fill="#ffffff" opacity="0.3"/>
+  
+  <circle cx="16" cy="50" r="4" fill="#374151"/>
+  <circle cx="16" cy="50" r="2.5" fill="#6b7280"/>
+  <circle cx="44" cy="50" r="4" fill="#374151"/>
+  <circle cx="44" cy="50" r="2.5" fill="#6b7280"/>
+  
+  <circle cx="50" cy="14" r="8" fill="url(#calcGradient)" stroke="#ffffff" stroke-width="2"/>
+  <circle cx="47" cy="11" r="1" fill="#ffffff"/>
+  <circle cx="53" cy="11" r="1" fill="#ffffff"/>
+  <circle cx="47" cy="17" r="1" fill="#ffffff"/>
+  <circle cx="53" cy="17" r="1" fill="#ffffff"/>
+  
+  <line x1="48" y1="14" x2="52" y2="14" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="50" y1="12" x2="50" y2="16" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <line x1="2" y1="40" x2="6" y2="40" stroke="#9ca3af" stroke-width="1" opacity="0.6"/>
+  <line x1="2" y1="44" x2="4" y2="44" stroke="#9ca3af" stroke-width="1" opacity="0.4"/>
+  <line x1="2" y1="36" x2="4" y2="36" stroke="#9ca3af" stroke-width="1" opacity="0.4"/>
+</svg>
