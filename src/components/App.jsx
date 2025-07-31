@@ -171,6 +171,48 @@ export default function App() {
           </div>
         </div>
       </main>
+      {/* Footer - Yasal Uyarı */}
+      <footer className="bg-gray-50 border-t border-gray-200 py-6 mt-12">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
+            <div className="flex">
+              <div className="flex-shrink-0">
+                <span className="text-yellow-400 text-xl">⚠️</span>
+              </div>
+              <div className="ml-3">
+                <h3 className="text-sm font-medium text-yellow-800 mb-2">
+                  Önemli Uyarı ve Yasal Sorumluluk Reddi
+                </h3>
+                <div className="text-sm text-yellow-700 space-y-2">
+                  <p>
+                    <strong>Bu hesaplama aracı sadece genel bilgi ve fikir vermek amacıyla hazırlanmıştır.</strong> 
+                    Hesaplamalar %100 kesin değildir ve resmi vergi beyannamesi veya muhasebe işlemleri için kullanılmamalıdır.
+                  </p>
+                  <p>
+                    • Gerçek vergi hesaplamaları için <strong>muhasebeci</strong> veya <strong>mali müşaviriniz</strong> ile görüşüniz.
+                  </p>
+                  <p>
+                    • Vergi oranları ve mevzuat değişiklikleri hesaplamaları etkileyebilir.
+                  </p>
+                  <p>
+                    • Bu araçtan kaynaklanan herhangi bir mali kayıp veya yanlış hesaplamadan CargoCalc sorumlu değildir.
+                  </p>
+                  <p className="font-medium">
+                    <strong>Tavsiye:</strong> Bu sonuçları muhasebe uzmanınıza danışarak doğrulatın.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Copyright */}
+          <div className="text-center mt-6 pt-4 border-t border-gray-200">
+            <p className="text-sm text-gray-500">
+              © 2025 CargoCalc. Bu araç bilgilendirme amaçlıdır. Profesyonel mali danışmanlık yerine geçmez.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
