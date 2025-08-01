@@ -92,10 +92,10 @@ function ExpenseList({ expenses = [], fixedExpenses = [], onDeleteExpense }) {
                   {/* SİL BUTONU - MOBİLDE HER ZAMAN GÖRÜNÜR */}
                   <button
                     onClick={() => onDeleteExpense(index)}
-                    className="bg-blue-500 hover:bg-blue-700 text-white p-3 sm:p-1.5 rounded-xl sm:rounded min-w-[44px] min-h-[44px] sm:min-w-auto sm:min-h-auto flex items-center justify-center transition-all transform active:scale-95 sm:active:scale-100"
-                  title="Masrafı Sil"
+                    className="bg-blue-500 hover:bg-blue-700 text-white p-3 sm:p-1.75 rounded-xl sm:rounded min-w-[44px] min-h-[44px] sm:min-w-auto sm:min-h-auto flex items-center justify-center transition-all transform active:scale-95 sm:active:scale-100"
+                    title="Masrafı Sil"
                   >
-                    <span className="text-base sm:text-xs">🗑️ Sil</span>
+                    <span className="text-base sm:text-xs">Sil</span>
                   </button>
                 </li>
               );
@@ -143,9 +143,9 @@ function ExpenseList({ expenses = [], fixedExpenses = [], onDeleteExpense }) {
 
       {/* Mobil ipucu */}
       <div className="block sm:hidden mt-4 bg-gray-50 border border-gray-200 rounded-xl p-3">
-        <div className="flex items-center justify-center text-gray-500 text-sm">
-          <span className="mr-2">💡</span>
-          Masraf silmek için kırmızı butona dokunun
+        <div className=" items-center justify-center text-gray-500 text-sm">
+          <span className="mr-2">İpucu:</span>
+          <p>Masraf silmek için sil butona dokunun.</p>
         </div>
       </div>
     </div>

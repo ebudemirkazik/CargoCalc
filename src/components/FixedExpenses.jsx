@@ -7,7 +7,7 @@ function FixedExpenses({ onFixedExpensesChange, onAddToManualExpenses }) {
   const [newExpense, setNewExpense] = useState({
     name: "",
     yearlyAmount: "",
-    kdvRate: 20
+    kdvRate: 20,
   });
 
   // localStorage'dan yükle
@@ -19,12 +19,12 @@ function FixedExpenses({ onFixedExpensesChange, onAddToManualExpenses }) {
 
   // Aylık masrafları hesapla ve parent'a gönder
   const calculateMonthlyExpenses = (expenses) => {
-    const monthlyExpenses = expenses.map(expense => ({
+    const monthlyExpenses = expenses.map((expense) => ({
       ...expense,
       amount: Math.round(expense.yearlyAmount / 12), // Aylık tutar
-      isFixed: true // Sabit gider olduğunu belirt
+      isFixed: true, // Sabit gider olduğunu belirt
     }));
-    
+
     // Parent'a sadece hesaplama için gönder, otomatik ekleme yapmayacağız
     if (onFixedExpensesChange) {
       onFixedExpensesChange(monthlyExpenses);
@@ -34,7 +34,7 @@ function FixedExpenses({ onFixedExpensesChange, onAddToManualExpenses }) {
   // Yeni sabit gider ekle
   const handleAddExpense = (e) => {
     e.preventDefault();
-    
+
     if (!newExpense.name || !newExpense.yearlyAmount) {
       addToast("Lütfen tüm alanları doldurun!", "warning", 3000);
       return;
@@ -44,7 +44,7 @@ function FixedExpenses({ onFixedExpensesChange, onAddToManualExpenses }) {
       id: Date.now(),
       name: newExpense.name,
       yearlyAmount: parseFloat(newExpense.yearlyAmount),
-      kdvRate: parseFloat(newExpense.kdvRate)
+      kdvRate: parseFloat(newExpense.kdvRate),
     };
 
     const updated = [...fixedExpenses, expense];
@@ -59,7 +59,7 @@ function FixedExpenses({ onFixedExpensesChange, onAddToManualExpenses }) {
 
   // Sabit gider sil
   const handleDeleteExpense = (id) => {
-    const updated = fixedExpenses.filter(expense => expense.id !== id);
+    const updated = fixedExpenses.filter((expense) => expense.id !== id);
     setFixedExpenses(updated);
     localStorage.setItem("fixedExpenses", JSON.stringify(updated));
     calculateMonthlyExpenses(updated);
@@ -72,23 +72,33 @@ function FixedExpenses({ onFixedExpensesChange, onAddToManualExpenses }) {
     const manualExpense = {
       name: expense.name,
       amount: monthlyAmount,
-      kdvRate: expense.kdvRate
+      kdvRate: expense.kdvRate,
     };
 
     if (onAddToManualExpenses) {
       onAddToManualExpenses(manualExpense);
-      addToast(`${expense.name} manuel masraflara eklendi! (${format(monthlyAmount)} ₺)`, "success", 3000);
+      addToast(
+        `${expense.name} manuel masraflara eklendi! (${format(
+          monthlyAmount
+        )} ₺)`,
+        "success",
+        3000
+      );
     }
   };
 
   const format = (n) => n.toLocaleString("tr-TR", { maximumFractionDigits: 2 });
 
-  const totalYearlyAmount = fixedExpenses.reduce((sum, expense) => sum + expense.yearlyAmount, 0);
+  const totalYearlyAmount = fixedExpenses.reduce(
+    (sum, expense) => sum + expense.yearlyAmount,
+    0
+  );
   const totalMonthlyAmount = Math.round(totalYearlyAmount / 12);
-  
+
   // Toplam KDV hesapla
   const totalYearlyKdv = fixedExpenses.reduce((sum, expense) => {
-    const kdv = expense.yearlyAmount * (expense.kdvRate / (100 + expense.kdvRate));
+    const kdv =
+      expense.yearlyAmount * (expense.kdvRate / (100 + expense.kdvRate));
     return sum + (isNaN(kdv) ? 0 : kdv);
   }, 0);
   const totalMonthlyKdv = Math.round(totalYearlyKdv / 12);
@@ -98,11 +108,10 @@ function FixedExpenses({ onFixedExpensesChange, onAddToManualExpenses }) {
       <h2 className="text-xl sm:text-lg font-bold sm:font-semibold mb-6 sm:mb-3 text-gray-800">
         Yıllık Sabit Giderler
       </h2>
-      
+
       {/* Yeni sabit gider ekleme formu */}
       <form onSubmit={handleAddExpense} className="mb-6 sm:mb-4">
         <div className="space-y-4 sm:space-y-3 mb-4 sm:mb-3">
-          
           {/* Gider Adı */}
           <div>
             <label className="block text-base sm:text-sm font-semibold sm:font-medium text-gray-700 mb-2 sm:mb-1">
@@ -112,7 +121,9 @@ function FixedExpenses({ onFixedExpensesChange, onAddToManualExpenses }) {
               type="text"
               placeholder="Örn: Sigorta, Bakım, Lastik"
               value={newExpense.name}
-              onChange={(e) => setNewExpense({ ...newExpense, name: e.target.value })}
+              onChange={(e) =>
+                setNewExpense({ ...newExpense, name: e.target.value })
+              }
               className="w-full border border-gray-300 rounded-xl sm:rounded-lg px-4 sm:px-3 py-4 sm:py-2 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
@@ -126,7 +137,9 @@ function FixedExpenses({ onFixedExpensesChange, onAddToManualExpenses }) {
               type="number"
               placeholder="Örn: 12000"
               value={newExpense.yearlyAmount}
-              onChange={(e) => setNewExpense({ ...newExpense, yearlyAmount: e.target.value })}
+              onChange={(e) =>
+                setNewExpense({ ...newExpense, yearlyAmount: e.target.value })
+              }
               className="w-full border border-gray-300 rounded-xl sm:rounded-lg px-4 sm:px-3 py-4 sm:py-2 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
@@ -138,7 +151,9 @@ function FixedExpenses({ onFixedExpensesChange, onAddToManualExpenses }) {
             </label>
             <select
               value={newExpense.kdvRate}
-              onChange={(e) => setNewExpense({ ...newExpense, kdvRate: e.target.value })}
+              onChange={(e) =>
+                setNewExpense({ ...newExpense, kdvRate: e.target.value })
+              }
               className="w-full border border-gray-300 rounded-xl sm:rounded-lg px-4 sm:px-3 py-4 sm:py-2 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
               <option value="0">KDV %0 - Muaf</option>
@@ -150,19 +165,35 @@ function FixedExpenses({ onFixedExpensesChange, onAddToManualExpenses }) {
         </div>
 
         {/* Aylık tutar önizlemesi */}
-        {newExpense.yearlyAmount && !isNaN(parseFloat(newExpense.yearlyAmount)) && (
-          <div className="bg-blue-50 border border-blue-200 rounded-xl sm:rounded-lg p-4 sm:p-3 mb-4 sm:mb-3">
-            <p className="text-base sm:text-sm font-semibold text-blue-800 mb-2 sm:mb-1">
-              Aylık Tutar Önizlemesi:
-            </p>
-            <div className="space-y-1 text-sm sm:text-xs text-blue-700">
-              <p>• Aylık Tutar: <span className="font-semibold">{format(parseFloat(newExpense.yearlyAmount) / 12)} ₺</span></p>
-              {newExpense.kdvRate > 0 && (
-                <p>• Aylık KDV İndirimi: <span className="font-semibold">{format((parseFloat(newExpense.yearlyAmount) / 12) * (newExpense.kdvRate / (100 + parseFloat(newExpense.kdvRate))))} ₺</span></p>
-              )}
+        {newExpense.yearlyAmount &&
+          !isNaN(parseFloat(newExpense.yearlyAmount)) && (
+            <div className="bg-blue-50 border border-blue-200 rounded-xl sm:rounded-lg p-4 sm:p-3 mb-4 sm:mb-3">
+              <p className="text-base sm:text-sm font-semibold text-blue-800 mb-2 sm:mb-1">
+                Aylık Tutar Önizlemesi:
+              </p>
+              <div className="space-y-1 text-sm sm:text-xs text-blue-700">
+                <p>
+                  • Aylık Tutar:{" "}
+                  <span className="font-semibold">
+                    {format(parseFloat(newExpense.yearlyAmount) / 12)} ₺
+                  </span>
+                </p>
+                {newExpense.kdvRate > 0 && (
+                  <p>
+                    • Aylık KDV İndirimi:{" "}
+                    <span className="font-semibold">
+                      {format(
+                        (parseFloat(newExpense.yearlyAmount) / 12) *
+                          (newExpense.kdvRate /
+                            (100 + parseFloat(newExpense.kdvRate)))
+                      )}{" "}
+                      ₺
+                    </span>
+                  </p>
+                )}
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
         {/* Submit Button */}
         <button
@@ -171,9 +202,10 @@ function FixedExpenses({ onFixedExpensesChange, onAddToManualExpenses }) {
           className={`
             w-full py-4 sm:py-2 px-6 sm:px-4 rounded-xl sm:rounded-lg text-lg sm:text-sm font-bold sm:font-medium 
             transition-all transform active:scale-95 sm:active:scale-100
-            ${!newExpense.name || !newExpense.yearlyAmount
-              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              : 'bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            ${
+              !newExpense.name || !newExpense.yearlyAmount
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             }
           `}
         >
@@ -187,30 +219,40 @@ function FixedExpenses({ onFixedExpensesChange, onAddToManualExpenses }) {
           <h3 className="font-semibold text-base sm:text-sm text-gray-700">
             Kayıtlı Sabit Giderler:
           </h3>
-          
+
           <div className="space-y-3 sm:space-y-2">
             {fixedExpenses.map((expense) => {
-              const yearlyKdv = expense.yearlyAmount * (expense.kdvRate / (100 + expense.kdvRate));
+              const yearlyKdv =
+                expense.yearlyAmount *
+                (expense.kdvRate / (100 + expense.kdvRate));
               const monthlyKdv = Math.round(yearlyKdv / 12);
               const monthlyAmount = Math.round(expense.yearlyAmount / 12);
-              
+
               return (
-                <div key={expense.id} className="bg-gray-50 border border-gray-200 rounded-xl sm:rounded-lg p-4 sm:p-3">
-                  
+                <div
+                  key={expense.id}
+                  className="bg-gray-50 border border-gray-200 rounded-xl sm:rounded-lg p-4 sm:p-3"
+                >
                   {/* Başlık ve Butonlar */}
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 sm:mb-2">
                     <div className="flex-1 mb-3 sm:mb-0 sm:mr-3">
                       <h4 className="text-lg sm:text-base font-bold sm:font-semibold text-gray-800 mb-1">
                         {expense.name}
                       </h4>
-                      
+
                       {/* Tutarlar */}
                       <div className="space-y-1">
                         <p className="text-base sm:text-sm text-gray-600">
-                          Yıllık: <span className="font-semibold text-gray-800">{format(expense.yearlyAmount)} ₺</span>
+                          Yıllık:{" "}
+                          <span className="font-semibold text-gray-800">
+                            {format(expense.yearlyAmount)} ₺
+                          </span>
                         </p>
                         <p className="text-base sm:text-sm text-blue-600">
-                          Aylık: <span className="font-bold">{format(monthlyAmount)} ₺</span>
+                          Aylık:{" "}
+                          <span className="font-bold">
+                            {format(monthlyAmount)} ₺
+                          </span>
                         </p>
                         {expense.kdvRate > 0 && (
                           <p className="text-sm sm:text-xs text-green-600">
@@ -225,21 +267,24 @@ function FixedExpenses({ onFixedExpensesChange, onAddToManualExpenses }) {
                       {/* Manuel masraflara ekle butonu */}
                       <button
                         onClick={() => handleAddToManual(expense)}
-                        className="flex-1 sm:flex-none bg-green-500 hover:bg-green-700 text-white px-4 sm:px-2 py-3 sm:py-1.5 rounded-xl sm:rounded text-base sm:text-xs font-semibold sm:font-medium transition-all transform active:scale-95 sm:active:scale-100 min-h-[48px] sm:min-h-auto"
-                        title={`${expense.name} masrafını manuel listeye ekle (${format(monthlyAmount)} ₺)`}
+                        className="flex-1 sm:flex-none bg-green-500 hover:bg-green-700 text-white px-4 sm:px-3 py-3 sm:py-1.75 rounded-xl sm:rounded text-base sm:text-xs font-semibold sm:font-medium transition-all transform active:scale-95 sm:active:scale-100 min-h-[48px] sm:min-h-auto"
+                        title={`${
+                          expense.name
+                        } masrafını manuel listeye ekle (${format(
+                          monthlyAmount
+                        )} ₺)`}
                       >
                         <span className="sm:hidden">Manuel Listeye Ekle</span>
-                        <span className="hidden sm:inline">➕ Ekle</span>
+                        <span className="hidden sm:inline text-base sm:text-xs">Ekle</span>
                       </button>
-                      
+
                       {/* Sil butonu */}
                       <button
                         onClick={() => handleDeleteExpense(expense.id)}
-                        className="bg-blue-500 hover:bg-blue-700 text-white px-4 sm:px-2 py-3 sm:py-1.5 rounded-xl sm:rounded text-base sm:text-xs font-semibold sm:font-medium transition-all transform active:scale-95 sm:active:scale-100 min-h-[48px] sm:min-h-auto"
+                        className="bg-blue-500 hover:bg-blue-700 text-white p-3 sm:p-1.75 rounded-xl sm:rounded min-w-[44px] min-h-[44px] sm:min-w-auto sm:min-h-auto flex items-center justify-center transition-all transform active:scale-95 sm:active:scale-100"
                         title="Sabit gideri sil"
                       >
-                        
-                        <span className="text-base sm:text-xs">🗑️Sil</span>
+                        <span className="text-base sm:text-xs">Sil</span>
                       </button>
                     </div>
                   </div>
@@ -247,7 +292,7 @@ function FixedExpenses({ onFixedExpensesChange, onAddToManualExpenses }) {
               );
             })}
           </div>
-          
+
           {/* Toplam */}
           <div className="bg-blue-50 border border-blue-200 rounded-xl sm:rounded-lg p-4 sm:p-3 mt-4 sm:mt-3">
             <div className="space-y-3 sm:space-y-2">
@@ -264,7 +309,7 @@ function FixedExpenses({ onFixedExpensesChange, onAddToManualExpenses }) {
                   </p>
                 </div>
               </div>
-              
+
               {totalMonthlyKdv > 0 && (
                 <div className="flex justify-between items-center pt-2 sm:pt-1 border-t border-blue-200">
                   <span className="text-base sm:text-sm font-semibold text-green-700">
@@ -291,17 +336,17 @@ function FixedExpenses({ onFixedExpensesChange, onAddToManualExpenses }) {
           Nasıl Çalışır:
         </p>
         <div className="space-y-2 sm:space-y-1 text-sm sm:text-xs text-blue-700">
-          <p>• Yıllık sabit giderlerinizi buraya kaydedin (sigorta, rutin bakım, lastik vb.)</p>
-          <p>• Bu giderler sadece burada görünür ve aylık tutarları hesaplanır</p>
-          <p>• "Manuel Listeye Ekle" butonu ile aylık tutarları kolayca manuel masraflara ekleyebilirsiniz</p>
-        </div>
-      </div>
-
-      {/* Mobil ipucu */}
-      <div className="block sm:hidden mt-4 bg-gray-50 border border-gray-200 rounded-xl p-3">
-        <div className="text-gray-600 text-sm">
-          <p className="font-medium mb-1">İpucu:</p>
-          <p>Sabit giderlerinizi kaydettikten sonra "Manuel Listeye Ekle" butonuna basarak aylık hesaplamalara dahil edebilirsiniz.</p>
+          <p>
+            • Yıllık sabit giderlerinizi buraya kaydedin (sigorta, rutin bakım,
+            lastik vb.)
+          </p>
+          <p>
+            • Bu giderler sadece burada görünür ve aylık tutarları hesaplanır
+          </p>
+          <p>
+            • "Manuel Listeye Ekle" butonu ile aylık tutarları kolayca manuel
+            masraflara ekleyebilirsiniz
+          </p>
         </div>
       </div>
     </div>

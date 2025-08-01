@@ -2,7 +2,7 @@
 
 **Nakliye Maliyet ve Hakediş Hesaplama Sistemi**
 
-CargoFlow, nakliye işletmeleri için özel olarak geliştirilmiş, kapsamlı maliyet takibi ve vergi hesaplama uygulamasıdır. Türkiye'nin güncel vergi sistemine uygun olarak tasarlanmıştır.
+CargoCalc, nakliye işletmeleri için özel olarak geliştirilmiş, kapsamlı maliyet takibi ve vergi hesaplama uygulamasıdır. Türkiye'nin güncel vergi sistemine uygun olarak tasarlanmıştır.
 
 <div align="center">
 <strong>MASAÜSTÜ GÖRÜNÜMÜ</strong></br>
@@ -51,10 +51,10 @@ CargoFlow, nakliye işletmeleri için özel olarak geliştirilmiş, kapsamlı ma
 
 ```bash
 # Projeyi klonlayın
-git clone https://github.com/ebudemirkazik/CargoFlow.git
+git clone https://github.com/ebudemirkazik/CargoCalc.git
 
 # Proje dizinine girin
-cd CargoFlow
+cd CargoCalc
 
 # Bağımlılıkları yükleyin
 npm install

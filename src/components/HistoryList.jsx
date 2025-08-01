@@ -50,14 +50,14 @@ function HistoryList({ refreshTrigger }) {
       const now = new Date();
       const diffTime = Math.abs(now - date);
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      
+
       if (diffDays === 1) return "Bugün";
       if (diffDays === 2) return "Dün";
       if (diffDays <= 7) return `${diffDays} gün önce`;
-      
+
       return date.toLocaleDateString("tr-TR", {
         day: "2-digit",
-        month: "2-digit"
+        month: "2-digit",
       });
     } catch (error) {
       return "Tarih bilinmiyor";
@@ -85,8 +85,10 @@ function HistoryList({ refreshTrigger }) {
       ) : (
         <div className="space-y-4 sm:space-y-3">
           {history.map((item, i) => (
-            <div key={i} className="bg-gray-50 border border-gray-200 rounded-xl sm:rounded-lg p-4 sm:p-3 hover:bg-gray-100 transition-colors">
-              
+            <div
+              key={i}
+              className="bg-gray-50 border border-gray-200 rounded-xl sm:rounded-lg p-4 sm:p-3 hover:bg-gray-100 transition-colors"
+            >
               {/* Başlık ve Silme Butonu */}
               <div className="flex justify-between items-start mb-4 sm:mb-2">
                 <div>
@@ -97,13 +99,13 @@ function HistoryList({ refreshTrigger }) {
                     {formatDate(item.date)}
                   </p>
                 </div>
-                
+
                 <button
                   onClick={() => deleteHistoryItem(i)}
-                  className="bg-blue-500 hover:bg-blue-700 text-white p-3 sm:p-1.5 rounded-xl sm:rounded min-w-[44px] min-h-[44px] sm:min-w-auto sm:min-h-auto flex items-center justify-center transition-all transform active:scale-95 sm:active:scale-100"
+                  className="bg-blue-500 hover:bg-blue-700 text-white p-3 sm:p-1.75 rounded-xl sm:rounded min-w-[44px] min-h-[44px] sm:min-w-auto sm:min-h-auto flex items-center justify-center transition-all transform active:scale-95 sm:active:scale-100"
                   title="Hesaplamayı Sil"
                 >
-                  <span className="text-base sm:text-xs">🗑️ Sil</span>
+                  <span className="text-base sm:text-xs">Sil</span>
                 </button>
               </div>
 
@@ -121,30 +123,37 @@ function HistoryList({ refreshTrigger }) {
 
               {/* Ana Bilgiler - Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-2 mb-4 sm:mb-3">
-                
                 <div className="bg-blue-50 p-3 sm:p-2 rounded-lg">
-                  <p className="text-sm sm:text-xs text-blue-600 mb-1">Hakediş:</p>
+                  <p className="text-sm sm:text-xs text-blue-600 mb-1">
+                    Hakediş:
+                  </p>
                   <p className="text-lg sm:text-base font-bold text-blue-800">
                     {format(item.income)} ₺
                   </p>
                 </div>
 
                 <div className="bg-red-50 p-3 sm:p-2 rounded-lg">
-                  <p className="text-sm sm:text-xs text-red-600 mb-1">Masraflar:</p>
+                  <p className="text-sm sm:text-xs text-red-600 mb-1">
+                    Masraflar:
+                  </p>
                   <p className="text-lg sm:text-base font-bold text-red-800">
                     {format(item.totalExpenses)} ₺
                   </p>
                 </div>
 
                 <div className="bg-yellow-50 p-3 sm:p-2 rounded-lg">
-                  <p className="text-sm sm:text-xs text-yellow-600 mb-1">Ödenecek KDV:</p>
+                  <p className="text-sm sm:text-xs text-yellow-600 mb-1">
+                    Ödenecek KDV:
+                  </p>
                   <p className="text-lg sm:text-base font-bold text-yellow-800">
                     {format(item.odenecekKdv)} ₺
                   </p>
                 </div>
 
                 <div className="bg-purple-50 p-3 sm:p-2 rounded-lg">
-                  <p className="text-sm sm:text-xs text-purple-600 mb-1">Gelir Vergisi:</p>
+                  <p className="text-sm sm:text-xs text-purple-600 mb-1">
+                    Gelir Vergisi:
+                  </p>
                   <p className="text-lg sm:text-base font-bold text-purple-800">
                     {format(item.gelirVergisi)} ₺
                   </p>
@@ -166,21 +175,22 @@ function HistoryList({ refreshTrigger }) {
               {/* Masraf detayları varsa göster */}
               {item.expenses && item.expenses.length > 0 && (
                 <details className="bg-white border border-gray-200 rounded-lg overflow-hidden">
-                  <summary className="p-3 sm:p-2 cursor-pointer hover:bg-gray-50 transition-colors">
-                    <div className="flex justify-between items-center">
-                      <span className="text-base sm:text-sm font-medium text-blue-600">
-                        Masraf Detayları
-                      </span>
-                      <span className="text-sm sm:text-xs text-gray-500">
-                        {item.expenses.length} kalem
-                      </span>
-                    </div>
+                  <summary className="p-3 sm:p-2 cursor-pointer hover:bg-gray-100 transition-colors text-sm sm:text-xs font-medium text-gray-700">
+                    <span className="text-xl md:text-sm font-bold md:font-medium text-blue-600">
+                      Masraf Detayları
+                    </span>
+                    <span className="text-lg md:text-xs text-gray-500 bg-gray-100 px-3 py-1 md:px-2 md:py-0.5 rounded-full font-bold md:font-medium">
+                      {item.expenses.length} kalem
+                    </span>
                   </summary>
-                  
+
                   <div className="px-3 sm:px-2 pb-3 sm:pb-2 border-t border-gray-200 pt-3 sm:pt-2">
                     <div className="space-y-2 sm:space-y-1">
                       {item.expenses.map((expense, idx) => (
-                        <div key={idx} className="flex justify-between items-center py-1">
+                        <div
+                          key={idx}
+                          className="flex justify-between items-center py-1"
+                        >
                           <span className="text-sm sm:text-xs text-gray-700">
                             {expense.name}
                             {expense.kdvRate > 0 && (
@@ -203,7 +213,9 @@ function HistoryList({ refreshTrigger }) {
               <div className="mt-3 sm:mt-2 flex justify-between items-center text-sm sm:text-xs text-gray-500">
                 <span>Kar Marjı:</span>
                 <span className="font-semibold">
-                  {item.income > 0 ? `${((item.netKazanc / item.income) * 100).toFixed(1)}%` : "0%"}
+                  {item.income > 0
+                    ? `${((item.netKazanc / item.income) * 100).toFixed(1)}%`
+                    : "0%"}
                 </span>
               </div>
             </div>
@@ -225,7 +237,7 @@ function HistoryList({ refreshTrigger }) {
           >
             Tüm Geçmişi Temizle
           </button>
-          
+
           {/* İstatistik */}
           <div className="text-center text-sm sm:text-xs text-gray-500">
             Toplam {history.length} hesaplama kaydı.
@@ -235,9 +247,11 @@ function HistoryList({ refreshTrigger }) {
 
       {/* Mobil ipucu */}
       <div className="block mt-4 bg-blue-50 border border-gray-200 rounded-xl p-3">
-        <div className="text-blue-800 text-sm ">
-          <p className="mb-1 font-semibold">Bilgi:</p>
-          <p className="text-blue-700">Masraf detaylarını görmek için "Masraf Detayları" bölümüne dokunun.</p>
+        <div className="text-gray-600 text-sm ">
+          <p className="font-medium mb-1">İpucu:</p>
+          <p>
+            Masraf detaylarını görmek için "Masraf Detayları" bölümüne dokunun.
+          </p>
         </div>
       </div>
     </div>

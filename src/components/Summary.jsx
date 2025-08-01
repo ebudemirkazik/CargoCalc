@@ -97,23 +97,30 @@ function Summary({ income, expenses, onHistoryUpdate }) {
       <h2 className="text-xl sm:text-lg font-bold sm:font-semibold mb-6 sm:mb-4 text-gray-800">
         Finansal Özet
       </h2>
-      
+
       {/* Ana rakamlar - Mobilde kartlar */}
       <div className="space-y-4 sm:space-y-2 mb-6 sm:mb-4">
-        
         {/* Hakediş */}
         <div className="bg-blue-50 border-l-4 border-blue-500 p-4 sm:p-2 rounded-r-lg sm:rounded-r">
           <div className="flex justify-between items-center">
-            <span className="font-semibold sm:font-medium text-blue-800">Hakediş:</span>
-            <span className="text-xl sm:text-base font-bold text-blue-800">{format(income)} ₺</span>
+            <span className="font-semibold sm:font-medium text-blue-800">
+              Hakediş:
+            </span>
+            <span className="text-xl sm:text-base font-bold text-blue-800">
+              {format(income)} ₺
+            </span>
           </div>
         </div>
 
         {/* Görünür masraflar */}
         <div className="bg-red-50 border-l-4 border-red-500 p-4 sm:p-2 rounded-r-lg sm:rounded-r">
           <div className="flex justify-between items-center">
-            <span className="font-semibold sm:font-medium text-red-800">Görünür Masraflar:</span>
-            <span className="text-xl sm:text-base font-bold text-red-800">{format(totalExpenses)} ₺</span>
+            <span className="font-semibold sm:font-medium text-red-800">
+              Görünür Masraflar:
+            </span>
+            <span className="text-xl sm:text-base font-bold text-red-800">
+              {format(totalExpenses)} ₺
+            </span>
           </div>
         </div>
 
@@ -131,7 +138,9 @@ function Summary({ income, expenses, onHistoryUpdate }) {
               </div>
             </div>
             <div className="space-y-1 text-sm sm:text-xs text-yellow-700">
-              <p>Vergi matrahından düşülüyor ama görünür masraflarda sayılmıyor</p>
+              <p>
+                Vergi matrahından düşülüyor ama görünür masraflarda sayılmıyor
+              </p>
               <p>KDV indirimi: {format(faturaKdv)} ₺</p>
             </div>
           </div>
@@ -142,37 +151,59 @@ function Summary({ income, expenses, onHistoryUpdate }) {
       <details className="mb-6 sm:mb-4 bg-gray-50 border border-gray-200 rounded-lg overflow-hidden">
         <summary className="p-4 sm:p-3 cursor-pointer hover:bg-gray-100 transition-colors">
           <div className="flex justify-between items-center">
-            <span className="text-base sm:text-sm font-semibold text-gray-700">Vergi Detayları</span>
+            <span className="text-base sm:text-sm font-semibold text-gray-700">
+              Vergi Detayları
+            </span>
             <span className="text-lg sm:text-base font-bold text-gray-800">
               {format(odenecekKdv + gelirVergisi)} ₺
             </span>
           </div>
         </summary>
-        
+
         <div className="px-4 sm:px-3 pb-4 sm:pb-3 space-y-3 sm:space-y-2 border-t border-gray-200 pt-3 sm:pt-2">
           <div className="flex justify-between items-center py-2 sm:py-1">
-            <span className="text-base sm:text-sm text-gray-600">Toplam İndirilecek KDV:</span>
-            <span className="text-base sm:text-sm font-semibold text-green-600">{format(totalKdv)} ₺</span>
+            <span className="text-base sm:text-sm text-gray-600">
+              Toplam İndirilecek KDV:
+            </span>
+            <span className="text-base sm:text-sm font-semibold text-green-600">
+              {format(totalKdv)} ₺
+            </span>
           </div>
-          
+
           <div className="flex justify-between items-center py-2 sm:py-1">
-            <span className="text-base sm:text-sm text-gray-600">Hakediş KDV (%20):</span>
-            <span className="text-base sm:text-sm font-semibold">{format(hakedisKdv)} ₺</span>
+            <span className="text-base sm:text-sm text-gray-600">
+              Hakediş KDV (%20):
+            </span>
+            <span className="text-base sm:text-sm font-semibold">
+              {format(hakedisKdv)} ₺
+            </span>
           </div>
-          
+
           <div className="flex justify-between items-center py-2 sm:py-1 border-t border-gray-200">
-            <span className="text-base sm:text-sm text-gray-600">Ödenecek KDV:</span>
-            <span className="text-base sm:text-sm font-semibold text-red-600">{format(odenecekKdv)} ₺</span>
+            <span className="text-base sm:text-sm text-gray-600">
+              Ödenecek KDV:
+            </span>
+            <span className="text-base sm:text-sm font-semibold text-red-600">
+              {format(odenecekKdv)} ₺
+            </span>
           </div>
-          
+
           <div className="flex justify-between items-center py-2 sm:py-1">
-            <span className="text-base sm:text-sm text-gray-600">Gelir Vergisi Matrahı:</span>
-            <span className="text-base sm:text-sm font-semibold">{format(gelirVergisiMatrahi)} ₺</span>
+            <span className="text-base sm:text-sm text-gray-600">
+              Gelir Vergisi Matrahı:
+            </span>
+            <span className="text-base sm:text-sm font-semibold">
+              {format(gelirVergisiMatrahi)} ₺
+            </span>
           </div>
-          
+
           <div className="flex justify-between items-center py-2 sm:py-1">
-            <span className="text-base sm:text-sm text-gray-600">Gelir Vergisi:</span>
-            <span className="text-base sm:text-sm font-semibold text-red-600">{format(gelirVergisi)} ₺</span>
+            <span className="text-base sm:text-sm text-gray-600">
+              Gelir Vergisi:
+            </span>
+            <span className="text-base sm:text-sm font-semibold text-red-600">
+              {format(gelirVergisi)} ₺
+            </span>
           </div>
         </div>
       </details>
@@ -193,7 +224,9 @@ function Summary({ income, expenses, onHistoryUpdate }) {
       {/* Net Kazanç - Ana Sonuç */}
       <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-6 sm:p-4 rounded-xl shadow-lg mb-6 sm:mb-4">
         <div className="text-center">
-          <p className="text-base sm:text-sm font-medium opacity-90 mb-2 sm:mb-1">NET KAZANÇ</p>
+          <p className="text-base sm:text-sm font-medium opacity-90 mb-2 sm:mb-1">
+            NET KAZANÇ
+          </p>
           <p className="text-4xl sm:text-2xl font-bold mb-2 sm:mb-1">
             {format(netKazanc)} ₺
           </p>
@@ -233,24 +266,34 @@ function Summary({ income, expenses, onHistoryUpdate }) {
       {/* Hızlı istatistikler */}
       <div className="mt-6 sm:mt-4 grid grid-cols-2 gap-4 sm:gap-3">
         <div className="bg-blue-50 p-4 sm:p-3 rounded-lg text-center">
-          <p className="text-xs sm:text-xs text-blue-600 mb-1 sm:mb-0">Kar Marjı</p>
+          <p className="text-xs sm:text-xs text-blue-600 mb-1 sm:mb-0">
+            Kar Marjı
+          </p>
           <p className="text-lg sm:text-base font-bold text-blue-800">
             {income > 0 ? ((netKazanc / income) * 100).toFixed(1) : "0"}%
           </p>
         </div>
         <div className="bg-red-50 p-4 sm:p-3 rounded-lg text-center">
-          <p className="text-xs sm:text-xs text-red-600 mb-1 sm:mb-0">Vergi Oranı</p>
+          <p className="text-xs sm:text-xs text-red-600 mb-1 sm:mb-0">
+            Vergi Oranı
+          </p>
           <p className="text-lg sm:text-base font-bold text-red-800">
-            {income > 0 ? (((odenecekKdv + gelirVergisi) / income) * 100).toFixed(1) : "0"}%
+            {income > 0
+              ? (((odenecekKdv + gelirVergisi) / income) * 100).toFixed(1)
+              : "0"}
+            %
           </p>
         </div>
       </div>
 
       {/* Mobil ipucu */}
-      <div className="block sm:hidden mt-4 bg-gray-50 border border-gray-200 rounded-xl p-3">
+      <div className="block mt-4 bg-gray-50 border border-gray-200 rounded-xl p-3">
         <div className="text-gray-600 text-sm">
-          <p className="font-medium mb-1">Bilgi:</p>
-          <p>Vergi detaylarını ve hesaplama mantığını görmek için ilgili bölümlere dokunun.</p>
+          <p className="font-medium mb-1">İpucu:</p>
+          <p>
+            Vergi detaylarını ve hesaplama mantığını görmek için ilgili
+            bölümlere dokunun.
+          </p>
         </div>
       </div>
     </div>
