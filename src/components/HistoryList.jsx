@@ -244,7 +244,7 @@ function HistoryList({ refreshTrigger }) {
       )}
 
       {/* Mobil ipucu */}
-      <div className="block mt-4 bg-blue-50 border border-gray-200 rounded-xl p-3">
+      <div className="block mt-4 bg-gray-50 border border-gray-200 rounded-xl p-3">
         <div className="text-gray-600 text-sm ">
           <p className="font-medium mb-1">İpucu:</p>
           <p>

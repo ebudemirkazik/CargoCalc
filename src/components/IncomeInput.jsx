@@ -219,9 +219,8 @@ function IncomeInput({ income, setIncome }) {
             setIncome(0);
             setError("");
           }}
-          className="w-full mt-3 sm:mt-2 px-4 sm:px-3 py-3 sm:py-2 text-base sm:text-xs text-gray-600 border border-gray-200 rounded-xl sm:rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center"
+          className="w-full bg-red-500 hover:bg-red-600 text-white px-4 sm:px-3 py-3 sm:py-2 rounded-xl sm:rounded-lg text-base sm:text-sm font-semibold sm:font-medium transition-all transform active:scale-95 sm:active:scale-100"
         >
-          <span className="mr-2">🗑️</span>
           Temizle
         </button>
       )}
