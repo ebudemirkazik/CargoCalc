@@ -5,9 +5,9 @@ function AddExpenseForm({ onAddExpense }) {
   const [expense, setExpense] = useState({
     name: "",
     amount: "",
-    kdvRate: 20
+    kdvRate: 20,
   });
-  
+
   const [errors, setErrors] = useState({});
 
   // Hızlı masraf şablonları
@@ -17,7 +17,7 @@ function AddExpenseForm({ onAddExpense }) {
     { name: "Bakım", kdvRate: 20, icon: "🔧" },
     { name: "Yemek", kdvRate: 10, icon: "🍽️" },
     { name: "Sigorta", kdvRate: 20, icon: "🛡️" },
-    { name: "Lastik", kdvRate: 20, icon: "🔘" }
+    { name: "Lastik", kdvRate: 20, icon: "🔘" },
   ];
 
   // Masraf adı validasyonu - sadece harfler, boşluk ve Türkçe karakterler
@@ -57,7 +57,7 @@ function AddExpenseForm({ onAddExpense }) {
   const handleNameChange = (e) => {
     const value = e.target.value;
     setExpense({ ...expense, name: value });
-    
+
     // Gerçek zamanlı validasyon
     const error = validateName(value);
     setErrors({ ...errors, name: error });
@@ -65,19 +65,19 @@ function AddExpenseForm({ onAddExpense }) {
 
   const handleAmountChange = (e) => {
     let value = e.target.value;
-    
+
     // Sadece sayı, nokta ve virgül kabul et
-    value = value.replace(/[^0-9.,]/g, '');
+    value = value.replace(/[^0-9.,]/g, "");
     // Virgülü noktaya çevir
-    value = value.replace(',', '.');
+    value = value.replace(",", ".");
     // Birden fazla nokta varsa sadece ilkini bırak
-    const parts = value.split('.');
+    const parts = value.split(".");
     if (parts.length > 2) {
-      value = parts[0] + '.' + parts.slice(1).join('');
+      value = parts[0] + "." + parts.slice(1).join("");
     }
-    
+
     setExpense({ ...expense, amount: value });
-    
+
     // Gerçek zamanlı validasyon
     const error = validateAmount(value);
     setErrors({ ...errors, amount: error });
@@ -88,24 +88,24 @@ function AddExpenseForm({ onAddExpense }) {
     setExpense({
       name: quickExpense.name,
       amount: expense.amount, // Mevcut tutarı koru
-      kdvRate: quickExpense.kdvRate
+      kdvRate: quickExpense.kdvRate,
     });
-    
+
     // Name error'ını temizle
     setErrors({ ...errors, name: null });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Tüm alanları valide et
     const nameError = validateName(expense.name);
     const amountError = validateAmount(expense.amount);
-    
+
     if (nameError || amountError) {
       setErrors({
         name: nameError,
-        amount: amountError
+        amount: amountError,
       });
       return;
     }
@@ -114,11 +114,11 @@ function AddExpenseForm({ onAddExpense }) {
     const cleanExpense = {
       name: expense.name.trim(),
       amount: parseFloat(expense.amount),
-      kdvRate: parseFloat(expense.kdvRate)
+      kdvRate: parseFloat(expense.kdvRate),
     };
 
     onAddExpense(cleanExpense);
-    
+
     // Formu temizle
     setExpense({ name: "", amount: "", kdvRate: 20 });
     setErrors({});
@@ -129,14 +129,13 @@ function AddExpenseForm({ onAddExpense }) {
   return (
     <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-4 sm:p-6">
       <h2 className="text-xl sm:text-lg font-bold sm:font-semibold mb-6 sm:mb-4 text-gray-800 flex items-center">
-        <span className="mr-2">➕</span>
         Yeni Masraf Ekle
       </h2>
-      
+
       {/* Hızlı Masraf Seçimi - Mobilde daha büyük */}
       <div className="mb-6 sm:mb-4">
         <label className="block text-base sm:text-sm font-semibold sm:font-medium text-gray-700 mb-3 sm:mb-2">
-          🚀 Hızlı Seçim:
+          Hızlı Seçim:
         </label>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-2">
           {quickExpenses.map((quick) => (
@@ -146,25 +145,30 @@ function AddExpenseForm({ onAddExpense }) {
               onClick={() => handleQuickExpense(quick)}
               className={`
                 flex flex-col items-center p-3 sm:p-2 rounded-xl sm:rounded-lg border-2 transition-all transform active:scale-95 sm:active:scale-100
-                ${expense.name === quick.name 
-                  ? 'border-blue-500 bg-blue-50 text-blue-700' 
-                  : 'border-gray-200 bg-gray-50 text-gray-700 hover:border-blue-300 hover:bg-blue-50'
+                ${
+                  expense.name === quick.name
+                    ? "border-blue-500 bg-blue-50 text-blue-700"
+                    : "border-gray-200 bg-gray-50 text-gray-700 hover:border-blue-300 hover:bg-blue-50"
                 }
               `}
             >
               <span className="text-2xl sm:text-xl mb-1">{quick.icon}</span>
-              <span className="text-sm sm:text-xs font-medium">{quick.name}</span>
-              <span className="text-xs text-gray-500">KDV %{quick.kdvRate}</span>
+              <span className="text-sm sm:text-xs font-medium">
+                {quick.name}
+              </span>
+              <span className="text-xs text-gray-500">
+                KDV %{quick.kdvRate}
+              </span>
             </button>
           ))}
         </div>
       </div>
-      
+
       <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-4">
         {/* Masraf Adı */}
         <div>
           <label className="block text-base sm:text-sm font-semibold sm:font-medium text-gray-700 mb-2 sm:mb-1">
-            📝 Masraf Adı
+            Masraf Adı
           </label>
           <input
             type="text"
@@ -174,9 +178,10 @@ function AddExpenseForm({ onAddExpense }) {
             className={`
               w-full border rounded-xl sm:rounded-lg px-4 sm:px-3 py-4 sm:py-2 text-base sm:text-sm 
               focus:outline-none focus:ring-2 transition-colors
-              ${errors.name 
-                ? 'border-red-300 focus:ring-red-500 bg-red-50' 
-                : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'
+              ${
+                errors.name
+                  ? "border-red-300 focus:ring-red-500 bg-red-50"
+                  : "border-gray-300 focus:ring-blue-500 focus:border-blue-500"
               }
             `}
             maxLength={50}
@@ -192,7 +197,7 @@ function AddExpenseForm({ onAddExpense }) {
         {/* Tutar */}
         <div>
           <label className="block text-base sm:text-sm font-semibold sm:font-medium text-gray-700 mb-2 sm:mb-1">
-            💰 Tutar (₺)
+            Tutar (₺)
           </label>
           <input
             type="text"
@@ -202,9 +207,10 @@ function AddExpenseForm({ onAddExpense }) {
             className={`
               w-full border rounded-xl sm:rounded-lg px-4 sm:px-3 py-4 sm:py-2 text-base sm:text-sm 
               focus:outline-none focus:ring-2 transition-colors
-              ${errors.amount 
-                ? 'border-red-300 focus:ring-red-500 bg-red-50' 
-                : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'
+              ${
+                errors.amount
+                  ? "border-red-300 focus:ring-red-500 bg-red-50"
+                  : "border-gray-300 focus:ring-blue-500 focus:border-blue-500"
               }
             `}
           />
@@ -219,11 +225,13 @@ function AddExpenseForm({ onAddExpense }) {
         {/* KDV Oranı */}
         <div>
           <label className="block text-base sm:text-sm font-semibold sm:font-medium text-gray-700 mb-2 sm:mb-1">
-            📊 KDV Oranı
+            KDV Oranı
           </label>
           <select
             value={expense.kdvRate}
-            onChange={(e) => setExpense({ ...expense, kdvRate: e.target.value })}
+            onChange={(e) =>
+              setExpense({ ...expense, kdvRate: e.target.value })
+            }
             className="w-full border border-gray-300 rounded-xl sm:rounded-lg px-4 sm:px-3 py-4 sm:py-2 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             <option value="0">KDV %0</option>
@@ -234,29 +242,55 @@ function AddExpenseForm({ onAddExpense }) {
         </div>
 
         {/* KDV Hesaplama Önizleme */}
-        {expense.amount && !errors.amount && !isNaN(parseFloat(expense.amount)) && expense.kdvRate > 0 && (
-          <div className="bg-blue-50 border border-blue-200 rounded-xl sm:rounded p-4 sm:p-3">
-            <p className="text-base sm:text-sm font-semibold sm:font-medium text-blue-800 mb-2 sm:mb-1 flex items-center">
-              <span className="mr-2">🧮</span>
-              KDV Hesaplaması:
-            </p>
-            <div className="space-y-1 text-sm sm:text-xs text-blue-700">
-              <p>• KDV Tutarı: <span className="font-semibold">{format(parseFloat(expense.amount) * (expense.kdvRate / (100 + parseFloat(expense.kdvRate))))} ₺</span></p>
-              <p>• Net Tutar: <span className="font-semibold">{format(parseFloat(expense.amount) - (parseFloat(expense.amount) * (expense.kdvRate / (100 + parseFloat(expense.kdvRate)))))} ₺</span></p>
+        {expense.amount &&
+          !errors.amount &&
+          !isNaN(parseFloat(expense.amount)) &&
+          expense.kdvRate > 0 && (
+            <div className="bg-blue-50 border border-blue-200 rounded-xl sm:rounded p-4 sm:p-3">
+              <p className="text-base sm:text-sm font-semibold sm:font-medium text-blue-800 mb-2 sm:mb-1 flex items-center">
+                <span className="mr-2">🧮</span>
+                KDV Hesaplaması:
+              </p>
+              <div className="space-y-1 text-sm sm:text-xs text-blue-700">
+                <p>
+                  • KDV Tutarı:{" "}
+                  <span className="font-semibold">
+                    {format(
+                      parseFloat(expense.amount) *
+                        (expense.kdvRate / (100 + parseFloat(expense.kdvRate)))
+                    )}{" "}
+                    ₺
+                  </span>
+                </p>
+                <p>
+                  • Net Tutar:{" "}
+                  <span className="font-semibold">
+                    {format(
+                      parseFloat(expense.amount) -
+                        parseFloat(expense.amount) *
+                          (expense.kdvRate /
+                            (100 + parseFloat(expense.kdvRate)))
+                    )}{" "}
+                    ₺
+                  </span>
+                </p>
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
         {/* Submit Button - Mobilde büyük */}
         <button
           type="submit"
-          disabled={!expense.name || !expense.amount || errors.name || errors.amount}
+          disabled={
+            !expense.name || !expense.amount || errors.name || errors.amount
+          }
           className={`
             w-full py-4 sm:py-2 px-6 sm:px-4 rounded-xl sm:rounded-lg text-lg sm:text-sm font-bold sm:font-medium 
             transition-all transform active:scale-95 sm:active:scale-100 shadow-lg sm:shadow-none
-            ${!expense.name || !expense.amount || errors.name || errors.amount
-              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              : 'bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
+            ${
+              !expense.name || !expense.amount || errors.name || errors.amount
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             }
           `}
         >
@@ -280,7 +314,10 @@ function AddExpenseForm({ onAddExpense }) {
           <span className="mr-2 mt-0.5">💡</span>
           <div>
             <p className="font-medium mb-1">İpucu:</p>
-            <p>Hızlı seçim butonlarını kullanarak yaygın masrafları kolayca ekleyebilirsiniz.</p>
+            <p>
+              Hızlı seçim butonlarını kullanarak yaygın masrafları kolayca
+              ekleyebilirsiniz.
+            </p>
           </div>
         </div>
       </div>

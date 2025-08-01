@@ -175,14 +175,13 @@ function HistoryList({ refreshTrigger }) {
               {/* Masraf detayları varsa göster */}
               {item.expenses && item.expenses.length > 0 && (
                 <details className="bg-white border border-gray-200 rounded-lg overflow-hidden">
-                  <summary className="p-3 sm:p-2 cursor-pointer hover:bg-gray-100 transition-colors text-sm sm:text-xs font-medium text-gray-700">
-                    <span className="text-xl md:text-sm font-bold md:font-medium text-blue-600">
-                      Masraf Detayları
-                    </span>
-                    <span className="text-lg md:text-xs text-gray-500 bg-gray-100 px-3 py-1 md:px-2 md:py-0.5 rounded-full font-bold md:font-medium">
-                      {item.expenses.length} kalem
-                    </span>
+                  <summary className="p-3 sm:p-2 cursor-pointer hover:bg-gray-100 transition-colors sm:text-xs text-xl md:text-sm font-bold md:font-medium text-blue-500">
+                    Masraf Detayları
                   </summary>
+
+                  <span className="text-lg md:text-xs text-gray-500 bg-gray-100 px-3 py-1 md:px-2 md:py-0.5 rounded-full font-bold md:font-medium">
+                    {item.expenses.length} kalem
+                  </span>
 
                   <div className="px-3 sm:px-2 pb-3 sm:pb-2 border-t border-gray-200 pt-3 sm:pt-2">
                     <div className="space-y-2 sm:space-y-1">

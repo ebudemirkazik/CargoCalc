@@ -148,16 +148,12 @@ function Summary({ income, expenses, onHistoryUpdate }) {
       </div>
 
       {/* Vergi detayları - Genişletilebilir */}
-      <details className="mb-6 sm:mb-4 bg-gray-50 border border-gray-200 rounded-lg overflow-hidden">
-        <summary className="p-4 sm:p-3 cursor-pointer hover:bg-gray-100 transition-colors">
-          <div className="flex justify-between items-center">
-            <span className="text-base sm:text-sm font-semibold text-gray-700">
-              Vergi Detayları
-            </span>
-            <span className="text-lg sm:text-base font-bold text-gray-800">
-              {format(odenecekKdv + gelirVergisi)} ₺
-            </span>
-          </div>
+      <details className="mb-6 sm:mb-4 bg-gray-50 border border-gray-200 rounded-lg">
+        <summary className="grid grid-cols-2 items-center p-3 sm:p-2 cursor-pointer hover:bg-gray-100 transition-colors sm:text-xs text-xl md:text-sm font-bold md:font-medium text-blue-500">
+          Vergi Detayları
+          <span className="text-lg sm:text-base text-right font-bold text-gray-800">
+            {format(odenecekKdv + gelirVergisi)} ₺
+          </span>
         </summary>
 
         <div className="px-4 sm:px-3 pb-4 sm:pb-3 space-y-3 sm:space-y-2 border-t border-gray-200 pt-3 sm:pt-2">

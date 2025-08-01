@@ -182,7 +182,7 @@ function ExpenseDonutChart({ expenses }) {
       {/* Toplam */}
       <div className="border-t mt-3 pt-3">
         <div className="flex justify-between font-semibold">
-          <span>💰 Toplam:</span>
+          <span>Toplam:</span>
           <span className="text-red-600">{format(totalAmount)} ₺</span>
         </div>
       </div>
