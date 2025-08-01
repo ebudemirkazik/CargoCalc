@@ -175,13 +175,12 @@ function HistoryList({ refreshTrigger }) {
               {/* Masraf detayları varsa göster */}
               {item.expenses && item.expenses.length > 0 && (
                 <details className="bg-white border border-gray-200 rounded-lg overflow-hidden">
-                  <summary className="p-3 sm:p-2 cursor-pointer hover:bg-gray-100 transition-colors sm:text-xs text-xl md:text-sm font-bold md:font-medium text-blue-500">
+                  <summary className="flex justify-between items-center p-3 sm:p-2 cursor-pointer hover:bg-gray-100 transition-colors sm:text-xs text-xl md:text-sm font-bold md:font-medium text-blue-500">
                     Masraf Detayları
+                    <span className="text-right text-lg md:text-xs text-gray-500 bg-gray-100 px-3 py-1 md:px-2 md:py-0.5 rounded-full font-bold md:font-medium">
+                      {item.expenses.length} kalem
+                    </span>
                   </summary>
-
-                  <span className="text-lg md:text-xs text-gray-500 bg-gray-100 px-3 py-1 md:px-2 md:py-0.5 rounded-full font-bold md:font-medium">
-                    {item.expenses.length} kalem
-                  </span>
 
                   <div className="px-3 sm:px-2 pb-3 sm:pb-2 border-t border-gray-200 pt-3 sm:pt-2">
                     <div className="space-y-2 sm:space-y-1">
@@ -209,7 +208,7 @@ function HistoryList({ refreshTrigger }) {
               )}
 
               {/* Performans göstergesi */}
-              <div className="mt-3 sm:mt-2 flex justify-between items-center text-sm sm:text-xs text-gray-500">
+              <div className="mt-3 sm:mt-2 flex justify-between items-center text-sm sm:text-xs text-gray-500 bg-gray-100 border border-gray-300 rounded-lg p-3 sm:p-2 mb-4 sm:mb-3">
                 <span>Kar Marjı:</span>
                 <span className="font-semibold">
                   {item.income > 0
