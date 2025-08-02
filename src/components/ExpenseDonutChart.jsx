@@ -15,6 +15,7 @@ function ExpenseDonutChart({ expenses }) {
       yakit: { name: "Yakıt", total: 0, color: "#ef4444", icon: "⛽" },
       yol: { name: "Yol", total: 0, color: "#3b82f6", icon: "🛣️" },
       bakim: { name: "Bakım", total: 0, color: "#10b981", icon: "🔧" },
+      arac: { name: "Araç", total: 0, color: "#BB00FF", icon: "🚗" },
       yemek: { name: "Yemek", total: 0, color: "#f59e0b", icon: "🍽️" },
       faturalar: { name: "Faturalar", total: 0, color: "#8b5cf6", icon: "📄" },
       diger: { name: "Diğer", total: 0, color: "#6b7280", icon: "📦" },
@@ -43,6 +44,8 @@ function ExpenseDonutChart({ expenses }) {
         name.includes("servis")
       ) {
         categories.bakim.total += expense.amount;
+      } else if (name.includes("sigorta") || name.includes("kasko")) {
+        categories.arac.total += expense.amount;
       } else if (
         name.includes("yemek") ||
         name.includes("restoran") ||
@@ -128,9 +131,7 @@ function ExpenseDonutChart({ expenses }) {
 
   return (
     <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
-      <h2 className="text-lg font-semibold mb-4">
-        Masraf Dağılımı
-      </h2>
+      <h2 className="text-lg font-semibold mb-4">Masraf Dağılımı</h2>
 
       <div className="h-64">
         <ResponsiveContainer width="100%" height="100%">

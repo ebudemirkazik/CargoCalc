@@ -4,6 +4,9 @@ import { useEffect } from "react";
 import React from "react";
 import { calculateIncomeTax } from "../utils/taxCalculator";
 import { useToast } from "./ToastNotification";
+import { exportToExcel } from "../utils/exportToExcel";
+import { getCategory } from "../utils/categorizeExpense";
+import { exportToPDF } from "../utils/exportToPDF";
 
 function Summary({ income, expenses, onHistoryUpdate }) {
   const { addToast } = useToast();
@@ -90,6 +93,65 @@ function Summary({ income, expenses, onHistoryUpdate }) {
     } else {
       addToast("Lütfen önce hakediş tutarını giriniz.", "warning", 3000);
     }
+  };
+
+  const handleExportPDF = () => {
+    exportToPDF({
+      expenses,
+      income,
+      totalExpenses,
+      totalFaturaMasraflar,
+      faturaKdv,
+      totalKdv,
+      hakedisKdv,
+      odenecekKdv,
+      gelirVergisiMatrahi,
+      gelirVergisi,
+      netKazanc,
+    });
+  };
+
+  const handleExport = () => {
+    const today = new Date().toISOString().split("T")[0];
+
+    const expenseRows = expenses.map((item) => ({
+      Tarih: item.date || today,
+      Masraf: item.name,
+      Tutar: item.amount + " ₺",
+      KDV: item.kdvRate + "%",
+      Kategori: getCategory(item.name),
+    }));
+
+    const spacer = [{}];
+
+    const summaryRows = [
+      { Başlık: "Hakediş", Değer: format(income) + " ₺" },
+      { Başlık: "Görünür Masraflar", Değer: format(totalExpenses) + " ₺" },
+      ...(totalFaturaMasraflar > 0
+        ? [
+            {
+              Başlık: "Fatura Masrafları",
+              Değer: format(totalFaturaMasraflar) + " ₺",
+            },
+            {
+              Başlık: "Fatura KDV İndirimi",
+              Değer: format(faturaKdv) + " ₺",
+            },
+          ]
+        : []),
+      { Başlık: "Toplam İndirilecek KDV", Değer: format(totalKdv) + " ₺" },
+      { Başlık: "Hakediş KDV (%20)", Değer: format(hakedisKdv) + " ₺" },
+      { Başlık: "Ödenecek KDV", Değer: format(odenecekKdv) + " ₺" },
+      {
+        Başlık: "Gelir Vergisi Matrahı",
+        Değer: format(gelirVergisiMatrahi) + " ₺",
+      },
+      { Başlık: "Gelir Vergisi", Değer: format(gelirVergisi) + " ₺" },
+      { Başlık: "Net Kazanç", Değer: format(netKazanc) + " ₺" },
+    ];
+
+    const exportData = [...expenseRows, ...spacer, ...summaryRows];
+    exportToExcel(exportData, `CargoCalc-${today}.xlsx`);
   };
 
   return (
@@ -280,6 +342,21 @@ function Summary({ income, expenses, onHistoryUpdate }) {
             %
           </p>
         </div>
+      </div>
+
+      <div className="text-right mt-4 flex justify-between">
+        <button
+          onClick={handleExportPDF}
+          className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition-all ml-2"
+        >
+          PDF'e Aktar
+        </button>
+        <button
+          onClick={handleExport}
+          className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition-all"
+        >
+          Excel'e Aktar
+        </button>
       </div>
 
       {/* Mobil ipucu */}
